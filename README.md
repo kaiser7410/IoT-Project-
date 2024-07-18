@@ -18,3 +18,4 @@ LinBot 有串接 OpenAI，輸入想要查詢的 Sensor 編號，OpenAI 會自動
 - 後端使用
   - Python 3.12.0
   - Mssql
+  - CHT IoT 智慧聯網大平台(已無法使用)
