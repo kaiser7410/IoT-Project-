@@ -9,7 +9,7 @@
 使用樹梅派和紅外線 Sensor 製作一個門禁管制裝置，並製作一個可以實時監控的網站和串接 LineBot。<br>
 LinBot 有串接 OpenAI，輸入想要查詢的 Sensor 編號，OpenAI 會自動去調取該 Sensor 編號的資料。
 
-##　技術使用
+## 技術使用
 
 - 前端使用
   - HTML
