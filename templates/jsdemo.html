@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS練習</title>
+    <script>
+        
+        //掌握網頁物件
+        var divObj=document.createElement("div");
+        divObj.innerText="我是區段物件"; //innerText <div>innerText</div>
+       
+    </script>
+</head>
+<body id="mybody">
+    <fieldset>
+        <legend>JS練習</legend>
+    </fieldset>
+</body>
+
+<script>
+     var bd=document.getElementById('mybody');
+     //掌握瀏覽器物件window
+     window.alert(bd);
+     bd.appendChild(divObj);
+</script>
+</html>

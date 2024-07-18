@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學生資料</title>
+    <script>
+       
+        //建構一個學生資料物件
+        //var global變數 整網頁範圍
+        var student={
+            id:1,
+            name:'張三豐',
+            address:'台南市安平',
+            phone:'06-454545',
+            birthdate:'2000-01-01',
+            //方法
+            information:function(){
+                alert('編號:'+this.id+' 姓名:'+this.name);
+            }
+        }
+    </script>
+</head>
+<body>
+    <fieldset>
+        <legend>學生資料</legend>
+        <div>
+            <button id="btnGo">填上資料...</button>
+        </div>
+        <table>
+            <!--列 row-->
+            <tr>
+                <td>學生編號</td>
+                <td><input type="text" id="txtId"></td>
+            </tr>
+            <tr>
+                <td>姓名</td>
+                <td><input type="text" id="txtName"/></td>
+            </tr>
+            <tr>
+                <td>聯絡地址</td>
+                <td><input type="text" id="txtAddress"/></td>
+            </tr>
+            <tr>
+                <td>連絡電話</td>
+                <td><input type="text" id="txtPhone"/></td>
+            </tr>
+            <tr>
+                <td>出生年月日</td>
+                <td><input type="date" id="txtBirthdate"/></td>
+            </tr>
+        </table>
+    </fieldset>
+    <script>
+         //直接參照出按鈕物件
+         document.getElementById('btnGo').addEventListener('click',
+            //傳遞一段事件程序
+            function(e){
+                console.log(e);
+                //TODO 進行UI 標籤物件 將學生資料進行渲染(Render)
+                document.getElementById('txtId').value=student.id;
+                document.getElementById('txtName').value=student.name;
+                document.getElementById('txtAddress').value=student.address;
+                document.getElementById('txtPhone').value=student.phone;
+                document.getElementById('txtBirthdate').value=student.birthdate;
+
+            }
+        );
+    </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>環境淨空監測即時資訊</title>
+    <script src="{{url_for('static',filename='js/vue.min.js')}}"></script>
+    <style>
+        img{
+            width: 50;
+            height: 50;
+        }
+    </style>
+</head>
+<body>
+    <fieldset id="app">
+        <legend>環境淨空監測即時資訊</legend>
+        <div>
+            <label>倉庫淨空狀態</label>
+            <div>
+                <button v-on:click="connectHandler">開始連線WebSocket Server...</button>
+            </div>
+            <div>
+                <label>狀態: </label>
+                <label>{[status]}</label>
+            </div>
+            <div>
+                <label>時間: </label>
+                <label>{[time]}</label>
+            </div>
+        </div>
+        <div>
+            <img v-bind:src="image" style="width: 50;height: 50;"/>
+        </div>
+    </fieldset>
+
+    <script>
+        //資料模組
+        var dataModel={
+            status:'淨空',
+            time:'2000-01-01T00:00:00',
+            image:'../static/images/store.jpg',
+            imageList:['alarm.gif','store.jpg']
+        }
+        //功能或者事件程序
+        var functions={
+            connectHandler:function(e){
+                //console.log(e);
+                //TODO 建構一個WebSocket Client(具有Open動作) 非同步連接上WebSocket Server(進行回呼callback)
+                let ws=new WebSocket("wss://iot.cht.com.tw:443/iot/ws/rawdata");
+                //配置一個聆聽open狀態callback(非同步回呼)
+                ws.onopen=function(e){
+                    console.log(e);
+                    //判斷是否opened
+                    if(e.target.readyState==1){
+                        //準備一份訂閱合約
+                        //建構JavaScript物件
+                        let contract={ck:"PKT7GHAC1UMZ11TF1P",resources:["/v1/device/36817231809/sensor/HCSR01/rawdata"]}
+                        //將物件序列化成json string
+                        let jsonString=JSON.stringify(contract)
+                        console.log(jsonString);
+                        ws.send(jsonString); //錯誤 
+                        }
+                    else{
+                        console.log('連接異常');
+                    }    
+                }
+                //訊息回呼
+                ws.onmessage=function(e){
+                    console.log(e);
+                    //擷取資料 重整 自動render UI(Vue)
+                    let jsonString=e.data;
+                    //反序列化成JS物件
+                    let jsonObj=JSON.parse(jsonString);
+                    //取出值屬性
+                    let dataString=jsonObj.value[0];
+                    //反序列化成物件
+                    let dataObj=JSON.parse(dataString);
+                    state=dataObj.status;
+                    //判斷狀態 設定圖片
+                    if (state=='in'){
+                        app.image="../static/images/"+app.imageList[0];
+                    }else{
+                        app.image="../static/images/"+app.imageList[1];
+                    }
+                    time=dataObj.locationtime;
+                    //指派給Vue資料模組
+                    app.status=state;
+                    app.time=time;
+
+                }
+                //聆聽錯誤的callback
+                ws.onerror=function(e){
+                    alert("連線發生問題了");
+                    //retry connect
+                }
+                
+            }
+        }
+        //建構Vue個體物件
+        var app=new Vue(
+            {
+                //設定Vue資料模組
+                data:dataModel,
+                //設定重複功能或者事件程序
+                methods:functions,
+                //換前端運算式符號
+                delimiters:['{[',']}']
+            }
+        );
+        //掛載
+        app.$mount('#app');
+    </script>
+</body>
+</html>
