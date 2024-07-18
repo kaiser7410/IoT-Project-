@@ -4,10 +4,10 @@ import json
 #定義Global全域變數
 chtHost='https://iot.cht.com.tw/iot/v1'
 #專案金鑰(readonly)
-readKey='PKTPT4SA9BRARZ27U7'
+readKey=''
 #專案可讀寫資料key
-rwKey='PKT7GHAC1UMZ11TF1P'
-deviceID='36817231809'
+rwKey=''
+deviceID=''
 
 
 #定義功能 串接特定SesorID 讀取最後一筆資料下來

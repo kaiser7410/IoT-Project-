@@ -2,9 +2,9 @@
 import pymssql
 #常數
 #定義連接上資料庫相關屬性
-server="localhost"
-userName="sa"
-password="1111"
+server=""
+userName=""
+password=""
 databaseName="IoTDB"
 
 #設計連接物件產生(具有Open)

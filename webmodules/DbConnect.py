@@ -1,9 +1,9 @@
 #連接上資料庫 引用pymssql
 import pymssql
 #定義連接上資料庫相關屬性
-server="localhost"
-userName="sa"
-password="1111"
+server=""
+userName=""
+password=""
 databaseName="IoTDB"
 
 #主程式

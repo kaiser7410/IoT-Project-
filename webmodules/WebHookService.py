@@ -8,7 +8,7 @@ from webmodules.DbUtility import connectionOpen,insert,update,queryForObject
 from webmodules.LineModules import sendReplyTextMessage,sendReplyFriendMessage
 
 #定義常數
-lineToken='t7SKfVopcUJ5SRAHRwxOR9jAFRtNG2uzZDllG5nGtQELs83M0tAsrMOTGC7m1l1gZaw8DAsSPk61PaghzG4uDoZM9vXsmWv/ufCyyfed5gSNbi2Vg/u8UvCpRVXyo/RmUyFFNKdw+6mnoIXCveQVAgdB04t89/1O/w1cDnyilFU='
+lineToken=''
 #定義掛勾Line Bot服務
 @app.route("/api/v1/webhook/service",methods=['POST'])
 def webhookProcess():
